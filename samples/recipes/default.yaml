@@ -1,0 +1,5 @@
+extend:
+  - samples/recipes/parent.yaml
+
+var:
+  hello: world
