@@ -2,9 +2,19 @@ extend:
   - samples/recipes/default.yaml
 
 var:
-  data: "halo"
+  table_source:
+    full_table_id: datapublic.data.table_summary
+    partition: event_timestamp
+  columns:
+    - source: order_no
+      rename: order_number
+    - source: name
+      rename: customer_name
+    - source: driver
+      rename: driver_name
 
 generator:
 - template: samples/templates/simple.jinja2
-  destination: samples/results/simple.sql
-- template: samples/templates/simple.jinja2
+  destination:
+    - samples/results/simple.sql
+    - log

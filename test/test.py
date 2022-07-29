@@ -1,7 +1,11 @@
 from src.recipe import Recipe
 
-recipe = Recipe('samples/recipes/simple.yaml')
+
+def test_simple_var():
+    recipe = Recipe({'var': {'foo': 'bar'}})
+    assert recipe.var['foo'] == 'bar'
 
 
-def test_var():
-    assert recipe.var == {'data': 'halo',  'foo': 'bar', 'hello': 'world'}
+def test_var_extend():
+    recipe = Recipe.from_path('samples/recipes/default.yaml')
+    assert recipe.var == {'foo': 'bar', 'hello': 'world'}

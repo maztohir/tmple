@@ -1,1 +1,21 @@
-TEST {{ data }} {{ foo }} TEST
+WITH
+source AS (
+  SELECT
+    {%- for col in columns %}
+    {{ col.source }} AS {{ col.rename }}{{ "," if not loop.last -}}
+    {% endfor %}
+  FROM
+    `{{ table_source.full_table_id }}`
+  {%- if table_source.partition != None %}
+  WHERE
+  {%- endif %}
+    {%- if table_source.partition != None %}
+    DATE({{ table_source.partition }}) = "{{ filter -}}"
+    {%- endif %}
+)
+
+SELECT
+  {%- for col in columns %}
+  {{ col.rename }}{{ "," if not loop.last -}}
+  {% endfor %}
+FROM source
