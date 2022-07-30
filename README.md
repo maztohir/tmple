@@ -63,7 +63,7 @@ generator:
 ```
 <sub><sup>*Save it to `.yaml` file to your folder as `working_dir/recipe.yaml`*</sup></sub>
 Done! above yaml is what we call `recipe`, for more detail, please take a look here.
-Now, lets run your recipe!
+Now, lets run your recipe! and see the result!
 ```bash
 cd working_dir
 
@@ -73,10 +73,56 @@ tmple --recipe recipe.yaml
 Uh oh, you can't run tmple yet? install first man! 😂😂
 
 #### Generate list of files based on multiple templates
+When you expect to generate multiple files, you can do setup on the recipe it self!
 
-#### Nested variables
+You can do write to multiple files for the same template, it will generate the same content but in different files
+```yaml
+var: variables
+
+generator:
+    - template: samples/templates/sample.jinja2
+      destination:
+        - samples/results/sample.sql
+        - /Users/personname/folder/tmple/src/results/simple.sql
+        - sample/result/log.txt
+```
+
+but if let say you need to generate with different template, then do this instead:
+```yaml
+var: variables
+
+generator:
+    - template: samples/templates/sample.jinja2
+      destination:
+        - samples/results/sample.sql
+        - /Users/personname/folder/tmple/src/results/simple.sql
+    - template: samples/templates/sample2.jinja2
+      destination:
+        - samples/results/sample2.sql
+    - template: samples/templates/sample3.jinja2
+      destination:
+        - samples/results/sample3.sql
+```
+When do this, make sure you have all variables setup in `var:` that needed from all your template.
 
 #### Just print, not generate files
+This will generate content from `sample.jinja2` but will not generate a file, it will only do log in your terminal.
+You need add `destination:` to generate a file.
+```yaml
+var: variables
+
+generator:
+    - template: samples/templates/sample.jinja2
+```
+
+This also only do log/print only
+```yaml
+var: variables
+
+generator:
+    - template: samples/templates/sample.jinja2
+      destination: log
+```
 
 #### Recipe concept
 Recipe is a config file to tell the `tmple` about:
@@ -122,3 +168,11 @@ generator: # mandatory
 ### Install via pip
 
 ### run
+Running from repository
+
+```bash
+
+cd tmple
+python3 main.py -r you_recipe.yaml
+
+```
