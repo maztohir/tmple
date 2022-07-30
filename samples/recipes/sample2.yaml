@@ -1,0 +1,20 @@
+var:
+  tables:
+    - name: top_user
+      limit: 10
+    - name: mid_user
+      limit: 20
+    - name: low_user
+      limit: 10
+    - name: base_user
+      limit: 30
+
+  columns:
+    - name
+    - phone
+    - address
+    - gender
+    - birth_date
+
+generator:
+- template: samples/templates/sample2.jinja2

@@ -1,0 +1,21 @@
+extend: #optional
+  - samples/recipes/default.yaml #inherit, all variables or generator written here will be also extended into this recipe
+
+var: #required, where you put any variable that your template needs
+  table_source:
+    full_table_id: datapublic.data.table_summary
+    partition: event_timestamp
+  columns:
+    - source: order_no
+      rename: order_number
+    - source: name
+      rename: customer_name
+    - source: driver
+      rename: driver_name
+
+generator: #you can generate multiple files using multiple template with single place variables in recipe
+- template: samples/templates/simple.jinja2 #you could also use absolute path as well
+  destination:
+    - samples/results/simple.sql #relative path where you run
+    - /Users/muhamad.tohir/Projects/tmple/src/results/simple.sql #absolute path to place to some folder
+    - log #will print you the log

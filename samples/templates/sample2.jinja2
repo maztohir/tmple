@@ -1,0 +1,7 @@
+WITH 
+{%- for tb in tables %}
+{{ tb.name }} AS (SELECT {% for c in columns %}{{ c }}{{ ',' if not loop.last }} {% endfor %}FROM {{ tb.name }} LIMIT {{ tb.limit }}){{ ',' if not loop.last }}
+{%- endfor %}
+{% for tb in tables %}
+SELECT * FROM {{ tb.name }} {{ 'UNION ALL' if not loop.last }}
+{%- endfor %}
