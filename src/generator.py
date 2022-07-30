@@ -28,4 +28,4 @@ class Generator:
         if path == 'log':
             print(content)
         else:
-            write_file(path, content)
+            write_file(path, content, create_if_folder_not_found=True)

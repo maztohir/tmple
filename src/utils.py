@@ -14,14 +14,14 @@ def read_file(file_path, allow_error=False):
         return None
 
 
-def write_file(file_path, content, allow_error=False, create_if_not_found=False, skip_if_exists=False):
+def write_file(file_path, content, allow_error=False, create_if_folder_not_found=False, skip_if_exists=False):
     try:
         if skip_if_exists:
             if Path(file_path).exists():
                 print(f'file {file_path} already exists, skipping')
                 return False
 
-        if create_if_not_found:
+        if create_if_folder_not_found:
             dir_path = os.path.dirname(file_path)
             Path(dir_path).mkdir(parents=True, exist_ok=True)
 
