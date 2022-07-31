@@ -1,7 +1,16 @@
 from setuptools import setup, find_packages
+import os
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
+
+path = os.path.dirname(os.path.realpath(__file__))
+requirements_path = path + '/requirements.txt'
+
+# Load main requirements file
+if os.path.isfile(requirements_path):
+    with open(requirements_path) as f:
+        install_requires = f.read().splitlines()
 
 setup(
     name="tmple",
@@ -23,6 +32,8 @@ setup(
     ],
     packages=find_packages(exclude=['examples', 'tests']),
     python_requires=">=3.5",
-    entry_points={"console_scripts": ["tmple=tmple.main:main"],},
+    entry_points={"console_scripts": ["tmple=tmple.main:main"], },
     include_package_data=True,
+    install_requires=install_requires,
+    zip_safe=False
 )
