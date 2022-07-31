@@ -1,7 +1,7 @@
 
 import argparse
-from src.template import Template
-from src.recipe import Recipe
+from tmple.template import Template
+from tmple.recipe import Recipe
 
 
 def main(args):
