@@ -1,4 +1,4 @@
-from src.recipe import Recipe
+from tmple.recipe import Recipe
 
 
 def test_simple_var():
