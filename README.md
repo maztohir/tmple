@@ -3,7 +3,16 @@ General files or content generator, using **template** and **data/variables**.
 
 > Content of the file will be controlled by the **template** (in [Jinja](https://jinja.palletsprojects.com/en/3.1.x/)), 
 and you can control the **template** using **data/variables** (in [Yaml](https://yaml.org/)).
-## Use cases
+
+- [Use Cases](#Use-cases)
+    - [Generate simple file from template](#👨‍👩‍👦-Generate-simple-file,-based-on-a-template)
+    - [Generate multiple files](#generate-list-of-files-based-on-multiple-templates)
+    - [Just print](#just-print-not-generate-files)
+- [Recipe Concept](#recipe-concept)
+- [Installation](#installation)
+- [Usage](#usage)
+
+## Use Cases
 #### 👨‍👩‍👦 Generate simple file, based on a template
 Let say you want to generate a repeated SQL file like this:
 ```sql
@@ -62,7 +71,7 @@ generator:
         - log # to also print the result on your terminal
 ```
 <sub><sup>*Save it to `.yaml` file to your folder as `working_dir/recipe.yaml`*</sup></sub>
-Done! above yaml is what we call `recipe`, for more detail, please take a look here.
+Done! above yaml is what we call `recipe`, for more detail, please take a look [Recipe Concept](#recipe-concept) section.
 Now, lets run your recipe! and see the result!
 ```bash
 cd working_dir
@@ -70,7 +79,7 @@ cd working_dir
 tmple --recipe recipe.yaml
 ```
 
-Uh oh, you can't run tmple yet? install first man! 😂😂
+Uh oh, you can't run tmple yet? [install first](#installation) man! 😂😂
 
 #### Generate list of files based on multiple templates
 When you expect to generate multiple files, you can do setup on the recipe it self!
@@ -124,7 +133,7 @@ generator:
       destination: log
 ```
 
-#### Recipe concept
+## Recipe concept
 Recipe is a config file to tell the `tmple` about:
 - all the variables that needed in your **templates** (`var:`)
 - which template that you gonna use to generate file (`generator:template:`)
@@ -163,16 +172,35 @@ generator: # mandatory
     # if there is no destination key here, then it will only print the generated content
 ```
 
-## Usage
+## Installation
 
-### Install via pip
-
-### run
-Running from repository
+Install using pip / pip3
 
 ```bash
+pip install tmple
+```
 
+## Usage
+#### Running from terminal
+```bash
+tmple -r path/your_recipe.yaml
+```
+or
+```bash
+tmple --recipe path/your_recipe.yaml
+```
+
+#### Running from python code
+
+```python
+from tmple.recipe import Recipe
+recipe = Recipe.from_path('your_recipe_path.yaml')
+recipe.generate()
+```
+
+#### Running from tmple repository
+
+```bash
 cd tmple
-python3 main.py -r you_recipe.yaml
-
+python3 main.py -r your_recipe.yaml
 ```
