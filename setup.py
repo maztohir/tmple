@@ -31,7 +31,7 @@ setup(
         "Topic :: Software Development :: Code Generators"
     ],
     packages=find_packages(exclude=['examples', 'tests']),
-    python_requires=">=3.5",
+    python_requires=">=3.6",
     entry_points={"console_scripts": ["tmple=tmple.main:main"], },
     include_package_data=True,
     install_requires=install_requires,
